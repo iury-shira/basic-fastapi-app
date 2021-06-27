@@ -70,7 +70,7 @@ def delete_message(id: int, db: Session = Depends(get_db)):
     return
 
 
-@app.get('/user/{id}', response_model=schemas.ShowUser, tags=['users'])
+@app.get('/user/{id}', response_model=schemas.ShowUserWithMessages, tags=['users'])
 def get_user_by_id(id: int, db: Session = Depends(get_db)):
     user = db.query(models.User).filter(models.User.id == id).first()
 

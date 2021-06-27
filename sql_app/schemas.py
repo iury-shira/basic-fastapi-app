@@ -6,6 +6,9 @@ class Message(BaseModel):
     title: str
     body: str
 
+    class Config:
+        orm_mode = True
+
 
 class User(BaseModel):
     name: str
@@ -22,11 +25,8 @@ class ShowUser(BaseModel):
 
 
 class ShowUserWithMessages(ShowUser):
-    message: List[Message] = []
+    messages: List[Message] = []
 
 
 class ShowMessage(Message):
     user: ShowUser
-
-    class Config:
-        orm_mode = True
