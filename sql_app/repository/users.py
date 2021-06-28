@@ -5,6 +5,10 @@ from fastapi import status, HTTPException
 from ..hashing import Hash
 
 
+def get_all(db: Session):
+    return db.query(models.User).all()
+
+
 def get_by_id(id: int, db: Session):
     user = db.query(models.User).filter(models.User.id == id).first()
 

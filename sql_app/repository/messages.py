@@ -17,19 +17,20 @@ def get_by_id(id: int, db: Session):
     return message
 
 
-def create(request: schemas.Message, db: Session):
-    new_message = models.Message(title=request.title, body=request.body, user_id=1)  # TODO: change this hardcoded id
+def create(request: schemas.Message, db: Session, current_user: schemas.TokenData):
+    new_message = models.Message(title=request.title, body=request.body, user_id=current_user.username.split()[1])
     db.add(new_message)
     db.commit()
     db.refresh(new_message)
     return new_message
 
 
-def update(id: int, request: schemas.Message, db: Session):
-    message = db.query(models.Message).filter(models.Message.id == id)
+def update(id: int, request: schemas.Message, db: Session, current_user: schemas.TokenData):
+    message = db.query(models.Message).filter(models.Message.id == id,
+                                              models.Message.user_id == current_user.username.split()[1])
 
     if not message.first():
-        message = {"detail": f"Message with id {id} not available"}
+        message = {"detail": f"Message with id {id} not available for user {current_user.username.split()[0]}"}
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=message)
 
     message.update(request.dict())

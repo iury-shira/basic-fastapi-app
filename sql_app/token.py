@@ -29,9 +29,9 @@ class Token:
 
             if username is None:
                 raise credentials_exception
-            # token_data = schemas.TokenData(username=username)
+            token_data = schemas.TokenData(username=username)
 
         except JWTError:
             raise credentials_exception
 
-        return
+        return token_data

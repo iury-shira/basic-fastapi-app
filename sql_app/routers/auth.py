@@ -25,5 +25,5 @@ def get_user(request: OAuth2PasswordRequestForm = Depends(), db: Session = Depen
         message = {"detail": f"Incorrect password"}
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=message)
 
-    access_token = Token.create_access_token(data={"sub": user.email + str(user.id)})
+    access_token = Token.create_access_token(data={"sub": user.email + ' ' + str(user.id)})
     return {"access_token": access_token, "token_type": "bearer"}
