@@ -37,6 +37,6 @@ def update_message(id: int, request: schemas.Message, db: Session = Depends(get_
 
 @router.delete('/{id}', status_code=status.HTTP_202_ACCEPTED)
 def delete_message(id: int, db: Session = Depends(get_db),
-                   current_user: schemas.User = Depends(oauth2.get_current_user)):
-    messages_repository.delete(id, db)
+                   current_user: schemas.TokenData = Depends(oauth2.get_current_user)):
+    messages_repository.delete(id, db, current_user)
     return
