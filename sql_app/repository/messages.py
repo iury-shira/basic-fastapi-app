@@ -38,11 +38,12 @@ def update(id: int, request: schemas.Message, db: Session, current_user: schemas
     return message.first()
 
 
-def delete(id: int, db: Session):
-    message = db.query(models.Message).filter(models.Message.id == id)
+def delete(id: int, db: Session, current_user: schemas.TokenData):
+    message = db.query(models.Message).filter(models.Message.id == id, 
+                                             models.Message.user_id == current_user.username.split()[1])
 
     if not message.first():
-        message = {"detail": f"Message with id {id} not available"}
+        message = {"detail": f"Message with id {id} not available for user {current_user.username.split()[0]}"}
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=message)
 
     message.delete(synchronize_session=False)
