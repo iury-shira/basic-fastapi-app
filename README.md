@@ -5,7 +5,6 @@ operations on a SQLite relational database, and also has an user authentication 
 
 ## Installation and set up
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
 A user has two options to interact with this application, one it's with its local machine (after cloning this repo with the 'git pull' command, an the other 
 option it's to access the safe link 'https://zeuk4w.deta.dev/', since the app was also deployed into the DETA plataform.
 
@@ -50,7 +49,8 @@ Now user can use its own browser to access localhost:8000/docs to have a nice an
 alternative it's to use the Postman app to make the requests.
 
 If the user choosed to access the link 'https://zeuk4w.deta.dev/', they can perform the tests and usage at 'https://zeuk4w.deta.dev/docs' or make the requests in 
-Postman, using 'https://zeuk4w.deta.dev/' before the endpoints.
+Postman, using 'https://zeuk4w.deta.dev/' before the endpoints. *It is important to notice that the cloud service DETA Micros only support read-only SQLite, so using the
+deta link, the user will be able to perform tests only with the GET verb endpoints.*
 
 ## Usage and testing
 
