@@ -59,7 +59,7 @@ Currently, the application has the below endpoints:
 - /login
 - /data
 - /user
-- /data
+- /message
 
 The '/login' endpoint needs to be accessed with the 'POST' verb, passing as body parameters, the 'username' and 'password'. If user make a request passing valid credentials, 
 they'll receive a reponse body (in JSON format) with a generated token. With this token, the user can access/make requests on the other endpoints, since they pass "Bearer <token>" 
