@@ -1,5 +1,5 @@
 from typing import List
-from .. import schemas, database
+from .. import schemas, database, oauth2
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 from ..repository import messages as messages_repository
@@ -13,7 +13,7 @@ get_db = database.get_db
 
 
 @router.get('/', response_model=List[schemas.ShowMessage])
-def get_message(db: Session = Depends(get_db)):
+def get_message(db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
     return messages_repository.get_all(db)
 
 
